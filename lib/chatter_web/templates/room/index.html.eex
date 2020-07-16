@@ -2,9 +2,11 @@
   <div class="col-md-3">
     <h3>Rooms:</h3>
     <ul class="list-group">
-      <li class="list-group-item">
-        General
-      </li>
+      <%= for room <- @rooms do %>
+        <li class="list-group-item margin-0">
+          <%= link room.name, to: Routes.room_path(@conn, :show, room.id) %>
+        </li>
+      <% end %>
     </ul>
   </div>
   <div class="col-md-9">
@@ -14,7 +16,7 @@
       </div>
       <div class="page-header">
         <h2><small>Choose a room or make one</small></h2>
-        <a class="btn btn-info">Create Room</a>
+        <%= link "Create Room", to: Routes.room_path(@conn, :new), class: "btn btn-info" %>
       </div>
     </div>
   </div>
