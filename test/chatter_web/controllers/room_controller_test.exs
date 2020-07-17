@@ -1,8 +1,6 @@
 defmodule ChatterWeb.RoomControllerTest do
   use ChatterWeb.ConnCase
 
-  alias Chatter.Talk
-
   import Chatter.Factory
 
   @create_attrs %{name: "general", description: "General discussions"}

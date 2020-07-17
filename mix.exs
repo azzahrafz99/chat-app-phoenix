@@ -20,7 +20,7 @@ defmodule Chatter.MixProject do
   def application do
     [
       mod: {Chatter.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ex_machina]
+      extra_applications: [:logger, :runtime_tools, :ex_machina, :faker_elixir_octopus]
     ]
   end
 
@@ -45,7 +45,8 @@ defmodule Chatter.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:ex_machina, "~> 2.4"}
+      {:ex_machina, "~> 2.4"},
+      {:faker_elixir_octopus, "> 0.0.0"}
     ]
   end
 
