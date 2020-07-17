@@ -3,14 +3,11 @@ defmodule ChatterWeb.RoomControllerTest do
 
   alias Chatter.Talk
 
+  import Chatter.Factory
+
   @create_attrs %{name: "general", description: "General discussions"}
   @update_attrs %{name: "General", title: "This is for general discussions"}
   @invalid_attrs %{name: nil, description: nil}
-
-  def fixture(:room) do
-    {:ok, room} = Talk.create_room(@create_attrs)
-    room
-  end
 
   describe "index" do
     test "lists all rooms", %{conn: conn} do
@@ -33,7 +30,10 @@ defmodule ChatterWeb.RoomControllerTest do
   end
 
   describe "update room" do
-    setup [:create_room]
+    setup do
+      room = insert(:room)
+      {:ok, conn: build_conn(), room: room}
+    end
 
     test "updates and returns chosen todo when data is valid", %{conn: conn, room: room} do
       conn = put(conn, Routes.room_path(conn, :update, room), room: @update_attrs)
@@ -47,7 +47,10 @@ defmodule ChatterWeb.RoomControllerTest do
   end
 
   describe "delete room" do
-    setup [:create_room]
+    setup do
+      room = insert(:room)
+      {:ok, conn: build_conn(), room: room}
+    end
 
     test "deletes room", %{conn: conn, room: room} do
       conn = delete(conn, Routes.room_path(conn, :delete, room))
@@ -57,9 +60,5 @@ defmodule ChatterWeb.RoomControllerTest do
       end
     end
   end
+ end
 
-  defp create_room(_) do
-    room = fixture(:room)
-    %{room: room}
-  end
-end

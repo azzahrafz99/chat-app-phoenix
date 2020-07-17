@@ -3,7 +3,6 @@ defmodule ChatterWeb.RoomController do
 
   alias Chatter.Talk.Room
   alias Chatter.Talk
-  alias Chatter.Repo
 
   def index(conn, _params) do
     rooms = Talk.list_rooms()
