@@ -46,7 +46,9 @@ defmodule Chatter.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ex_machina, "~> 2.4"},
-      {:faker_elixir_octopus, "> 0.0.0"}
+      {:faker_elixir_octopus, "> 0.0.0"},
+      {:comeonin, "~> 5.3"},
+      {:bcrypt_elixir, "~> 2.0"}
     ]
   end
 
