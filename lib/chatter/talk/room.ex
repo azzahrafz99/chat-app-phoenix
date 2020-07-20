@@ -7,6 +7,7 @@ defmodule Chatter.Talk.Room do
     field :description, :string
     field :name, :string
     field :topic, :string
+    belongs_to :user, Chatter.Accounts.User
 
     timestamps()
   end

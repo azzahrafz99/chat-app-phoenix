@@ -15,7 +15,7 @@
         <%= link "Chat App", to: Routes.room_path(@conn, :index), class: "navbar-brand text-light" %>
       </h3>
 
-      <%= if Chatter.Accounts.user_signed_in?(@conn) do %>
+      <%= if @signed_in? do %>
         <nav class="text-light my-2 my-md-0 mr-md-3">
           Signed in as: <strong><%= Chatter.Accounts.current_user(@conn).username %>
         </nav>

@@ -4,6 +4,9 @@ defmodule ChatterWeb.RoomController do
   alias Chatter.Talk.Room
   alias Chatter.Talk
 
+  plug :auth_user when action not in [:index]
+  plug :authorize_user when action in [:edit, :update, :delete]
+
   def index(conn, _params) do
     rooms = Talk.list_rooms()
     render(conn, "index.html", rooms: rooms)
@@ -15,7 +18,7 @@ defmodule ChatterWeb.RoomController do
   end
 
   def create(conn, %{"room" => room_params}) do
-    case Talk.create_room(room_params) do
+    case Talk.create_room(conn.assigns.current_user, room_params) do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Room Created!")
@@ -58,5 +61,31 @@ defmodule ChatterWeb.RoomController do
     conn
     |> put_flash(:info, "Room deleted")
     |> redirect(to: Routes.room_path(conn, :index))
+  end
+
+  defp auth_user(conn, _params) do
+    if conn.assigns.signed_in? do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You need to be signed in")
+      |> redirect(to: Routes.session_path(conn, :new))
+      |> halt()
+    end
+  end
+
+  defp authorize_user(conn, _params) do
+    %{params: %{"id" => room_id}} = conn
+
+    room = Talk.get_room!(room_id)
+
+    if conn.assigns.current_user.id == room.user_id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized")
+      |> redirect(to: Routes.room_path(conn, :index))
+      |> halt()
+    end
   end
 end
