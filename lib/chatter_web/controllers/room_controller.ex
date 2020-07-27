@@ -3,8 +3,9 @@ defmodule ChatterWeb.RoomController do
 
   alias Chatter.Talk.Room
   alias Chatter.Talk
+  alias ChatterWeb.Plugs.AuthUser
 
-  plug :auth_user when action not in [:index]
+  plug AuthUser when action not in [:index]
   plug :authorize_user when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
@@ -31,7 +32,7 @@ defmodule ChatterWeb.RoomController do
 
   def show(conn, %{"id" => id}) do
     room = Talk.get_room!(id)
-    render(conn, "show.html", room: room)
+    render(conn, "show.html", room: room, current_user: conn.assigns.current_user)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -76,10 +77,9 @@ defmodule ChatterWeb.RoomController do
 
   defp authorize_user(conn, _params) do
     %{params: %{"id" => room_id}} = conn
-
     room = Talk.get_room!(room_id)
 
-    if conn.assigns.current_user.id == room.user_id do
+    if AuthUser.can_access?(conn.assigns.current_user.id, room) do
       conn
     else
       conn

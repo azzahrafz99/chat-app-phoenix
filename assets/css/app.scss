@@ -1,6 +1,8 @@
 /* This file is for your main application css. */
 @import "./phoenix.css";
 @import "./overrides/form";
+@import "./overrides/navbar";
+@import "./overrides/button";
 @import "./helper";
 
 /* Alerts and form errors */
@@ -30,4 +32,8 @@
 }
 .alert:empty {
   display: none;
+}
+
+.container {
+  margin-top: 30px;
 }

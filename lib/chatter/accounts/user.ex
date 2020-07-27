@@ -12,6 +12,7 @@ defmodule Chatter.Accounts.User do
     field :password_confirmation, :string, virtual: true
 
     has_many :rooms, Chatter.Talk.Room
+    has_many :messages, Chatter.Talk.Message
 
     timestamps()
   end

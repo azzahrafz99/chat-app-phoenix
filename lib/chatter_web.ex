@@ -24,6 +24,7 @@ defmodule ChatterWeb do
       import Plug.Conn
       import ChatterWeb.Gettext
       alias ChatterWeb.Router.Helpers, as: Routes
+      alias ChatterWeb.Plugs.AuthUser
     end
   end
 
@@ -69,6 +70,7 @@ defmodule ChatterWeb do
       import ChatterWeb.ErrorHelpers
       import ChatterWeb.Gettext
       alias ChatterWeb.Router.Helpers, as: Routes
+      alias ChatterWeb.Plugs.AuthUser
     end
   end
 

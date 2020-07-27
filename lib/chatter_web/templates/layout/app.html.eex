@@ -10,23 +10,32 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
-    <div class="d-flex flex-column flex-md row align-items-center p-3 px-md-4 bg-dark">
-      <h3 class="my-0 mr-md-auto font-weight-normal">
-        <%= link "Chat App", to: Routes.room_path(@conn, :index), class: "navbar-brand text-light" %>
-      </h3>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <%= link "Chat App", to: Routes.room_path(@conn, :index), class: "text-light navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <%= if @signed_in? do %>
-        <nav class="text-light my-2 my-md-0 mr-md-3">
-          Signed in as: <strong><%= Chatter.Accounts.current_user(@conn).username %>
-        </nav>
-        <%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary" %>
-      <% else %>
-        <strong>
-          <%= link "Sign Up", to: Routes.registration_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
-          <%= link "Sign In", to: Routes.session_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
-        </strong>
-      <% end %>
-    </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= if @signed_in? do %>
+              <p class="username text-light">Signed in as: <b><%= Chatter.Accounts.current_user(@conn).username %></b></p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= if @signed_in? do %>
+              <%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary" %>
+            <% else %>
+              <strong>
+                <%= link "Sign Up", to: Routes.registration_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
+                <%= link "Sign In", to: Routes.session_path(@conn, :new), class: "btn btn-outline-success ml-md-3" %>
+              </strong>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <%= unless is_nil(get_flash(@conn, :info)) do %>
       <p class="alert alert-success"><%= get_flash(@conn, :info) %></p>
@@ -44,6 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script>window.userToken = "<%= assigns[:user_token] %>"</script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
