@@ -1,5 +1,12 @@
 nav {
-  padding: 15px !important;
+  padding: 5px 35px;
+  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.05);
+
+  .logo {
+    display: block;
+    position: absolute;
+    top: 22px;
+  }
 }
 
 li.nav-item {

@@ -1,5 +1,4 @@
 /* This file is for your main application css. */
-@import "./helpers/helper";
 @import "./helpers/variables";
 
 @import "./overrides/card";
@@ -11,6 +10,8 @@
 @import "./base/font";
 
 @import "./session";
+@import "./room";
 
 @import "./components/alerts";
 @import "./components/buttons";
+@import "./helpers/helper";

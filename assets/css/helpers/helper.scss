@@ -1,3 +1,7 @@
+.full-height {
+  height: 100%;
+}
+
 .margin-0 {
   margin: 0 !important;
 }
@@ -8,4 +12,12 @@
 
 .margin-top-200 {
   margin-top: 200px !important;
+}
+
+.margin-top-300 {
+  margin-top: 300px !important;
+}
+
+.bg-purple {
+  background-color: $purple;
 }

@@ -8,3 +8,14 @@
     border-color: $dark-purple;
   }
 }
+
+.btn-outline-purple {
+  color: $purple;
+  border: 1px solid $purple;
+
+  &:hover {
+    background-color: $purple;
+    border-color: $purple;
+    color: white;
+  }
+}
