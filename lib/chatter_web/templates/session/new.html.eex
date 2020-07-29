@@ -1,22 +1,45 @@
-<div class="auth-form-wrapper">
-  <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session, class: "form-signin"], fn f -> %>
-    <div class="text-center">
-      <h1>Sign In</h1>
-    </div>
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 margin-top-200">
+    <%= render ChatterWeb.SharedView, "_alert.html", assigns %>
 
-    <div class="form-group">
-      <%= label f, :email, class: "control-label" %>
-      <%= text_input f, :email, class: "form-control", required: true, autofocus: true %>
-      <%= error_tag f, :email %>
+    <div class="card card__custom">
+      <div class="row">
+        <div class="col-lg-6 left">
+          <div class="logo">
+            <img src="/images/chat.png" >
+            <h3>ChatApp</h3>
+          </div>
+          <div class="form form__session">
+            <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session, class: "form-signin"], fn f -> %>
+              <div class="text-center title">
+                <h2>Sign In</h2>
+              </div>
+
+              <div class="form-group">
+                <%= label f, :email, class: "control-label" %>
+                <%= text_input f, :email, class: "form-control", required: true, autofocus: true %>
+                <%= error_tag f, :email %>
+              </div>
+              <div class="form-group">
+                <%= label f, :password, class: "control-label" %>
+                <%= password_input f, :password, class: "form-control", required: true %>
+                <%= error_tag f, :password %>
+              </div>
+
+              <%= submit "Sign In", class: "btn btn-purple margin-0 btn-lg btn-block" %>
+            <% end %>
+          </div>
+
+          <div class="links text-center">
+            <%= link "Sign up for Chat App", to: Routes.registration_path(@conn, :new) %>
+          </div>
+        </div>
+        <div class="col-lg-6 right">
+          <div class="caption">
+            <span>Photo by <a href="https://unsplash.com/@austindistel?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Austin Distel</a> on <a href="https://unsplash.com/collections/11447470/work-%2B-building?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <%= label f, :password, class: "control-label" %>
-      <%= password_input f, :password, class: "form-control", required: true %>
-      <%= error_tag f, :password %>
-    </div>
-    <div class="form-group">
-      <%= submit "Sign In", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  </div>
 </div>
-

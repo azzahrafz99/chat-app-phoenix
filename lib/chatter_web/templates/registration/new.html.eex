@@ -1,34 +1,60 @@
-<div class="auth-form-wrapper">
-  <%= form_for @changeset, Routes.registration_path(@conn, :create), [as: :registration, class: "form-signup"], fn f -> %>
-    <div class="text-center">
-      <h1>Sign Up</h1>
-    </div>
 
-    <div class="form-group">
-      <%= label f, :email, class: "control-label" %>
-      <%= text_input f, :email, class: "form-control", required: true, autofocus: true %>
-      <%= error_tag f, :email %>
-    </div>
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 margin-top-100">
+    <div class="card card__custom">
+      <%= render ChatterWeb.SharedView, "_alert.html", assigns %> 
 
-    <div class="form-group">
-      <%= label f, :username, class: "control-label" %>
-      <%= text_input f, :username, class: "form-control", required: true %>
-      <%= error_tag f, :username %>
-    </div>
+      <div class="row">
+        <div class="col-lg-6 left">
+          <div class="logo">
+            <img src="/images/chat.png" >
+            <h3>ChatApp</h3>
+          </div>
+          <div class="form form__registration">
+            <%= form_for @changeset, Routes.registration_path(@conn, :create), [as: :registration, class: "form-signup"], fn f -> %>
+              <div class="text-center">
+                <h1>Sign Up</h1>
+              </div>
 
-    <div class="form-group">
-      <%= label f, :password, class: "control-label" %>
-      <%= password_input f, :password, class: "form-control", required: true %>
-      <%= error_tag f, :password %>
-    </div>
+              <div class="form-group">
+                <%= label f, :email, class: "control-label" %>
+                <%= text_input f, :email, class: "form-control", required: true, autofocus: true %>
+                <%= error_tag f, :email %>
+              </div>
 
-    <div class="form-group">
-      <%= label f, :password_confirmation, class: "control-label" %>
-      <%= password_input f, :password_confirmation, class: "form-control", required: true %>
-      <%= error_tag f, :password_confirmation %>
+              <div class="form-group">
+                <%= label f, :username, class: "control-label" %>
+                <%= text_input f, :username, class: "form-control", required: true %>
+                <%= error_tag f, :username %>
+              </div>
+
+              <div class="form-group">
+                <%= label f, :password, class: "control-label" %>
+                <%= password_input f, :password, class: "form-control", required: true %>
+                <%= error_tag f, :password %>
+              </div>
+
+              <div class="form-group">
+                <%= label f, :password_confirmation, class: "control-label" %>
+                <%= password_input f, :password_confirmation, class: "form-control", required: true %>
+                <%= error_tag f, :password_confirmation %>
+              </div>
+              <div class="form-group">
+                <%= submit "Sign Up", class: "btn btn-purple btn-lg btn-block" %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="links text-center">
+            <%= link "Sign in to Chat App", to: Routes.session_path(@conn, :new) %>
+          </div>
+        </div>
+        <div class="col-lg-6 right">
+          <div class="caption">
+            <span>Photo by <a href="https://unsplash.com/@austindistel?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Austin Distel</a> on <a href="https://unsplash.com/collections/11447470/work-%2B-building?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <%= submit "Sign Up", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+  </div>
 </div>

@@ -12,7 +12,7 @@ let presences = {}
 socket.connect()
 
 if (roomId) {
-  const timeout = 3000
+  const timeout = 1000
   var typingTimer
   let userTyping = false
   let channel = socket.channel(`room:${roomId}`, {})

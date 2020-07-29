@@ -1,0 +1,57 @@
+.card {
+  &__custom {
+    padding: 0;
+
+    .right {
+      background-image: url('/images/background.jpg');
+      background-size: cover;
+
+      .caption {
+        bottom: 8px;
+        font-size: 14px;
+        opacity: 0.7;
+        position: absolute;
+
+        span, a {
+          color: white;
+        }
+      }
+    }
+
+    .left {
+      background-color: white;
+      padding: 50px;
+    }
+  }
+}
+
+.form {
+  margin-top: 20%; 
+
+  .title {
+    margin-bottom: 25px;
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+
+  img {
+    width: 26px;
+  }
+
+  h3 {
+    color: $dark-purple;
+    display: inline;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+}
+
+.links {
+  font-size: 14px;
+  margin-top: 20px;
+}

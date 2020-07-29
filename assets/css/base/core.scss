@@ -1,0 +1,22 @@
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+
+body {
+  font-family: Poppins;
+}
+
+.container-fluid {
+  background-color: $light-purple;
+  height: 100%;
+}
+
+a {
+  color: $purple;
+  text-decoration: none;
+
+  &:hover {
+    color: $dark-purple;
+  }
+}
