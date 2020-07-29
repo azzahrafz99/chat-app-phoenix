@@ -11,7 +11,7 @@
       border-radius: unset;
 
       a {
-        color: black;
+        color: $dusty-purple;
         font-weight: 500;
       }
       
@@ -19,6 +19,10 @@
         background-color: $light-purple;
         border-left: 3px solid #5a189a;
         padding-left: 32px;
+        
+        a {
+          color: black !important;
+        }
       }
     }
   }
