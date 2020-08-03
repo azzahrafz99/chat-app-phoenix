@@ -6,7 +6,7 @@ let socket = new Socket("/socket", {
   }
 })
 
-let roomId = window.roomId
+let roomId    = window.roomId
 let presences = {}
 
 socket.connect()
@@ -21,6 +21,7 @@ if (roomId) {
     .receive("ok", resp => {
       console.log("Joined successfully", resp)
       resp.messages.reverse().map(msg => displayMessage(msg))
+      scrollToBottom()
     })
     .receive("error", resp => {
       console.log("Unable to join", resp)
@@ -28,18 +29,19 @@ if (roomId) {
 
   channel.on(`room:${roomId}:new_message`, (message) => {
     displayMessage(message)
+    scrollToBottom()
   })
 
   channel.on("presence_state", state => {
     presences = Presence.syncState(presences, state)
-    console.log(presences)
     displayUsers(presences)
+    scrollToBottom()
   })
 
   channel.on("presence_diff", diff => {
     presences = Presence.syncDiff(presences, diff)
-    console.log(presences)
     displayUsers(presences)
+    scrollToBottom()
   })
 
   document.querySelector('#message-form').addEventListener('submit', (e) => {
@@ -84,8 +86,17 @@ if (roomId) {
   }
 
   const displayMessage = (msg) => {
+    let username = window.username
+    let messageClass = username == msg.user.username ? 'user' : 'other'
+
     let template = `
-      <li class="list-group-item"><strong>${msg.user.username}</strong>: ${msg.body}</li>
+      <li class="list-group-item message message__${messageClass}">
+        <p class="username">${msg.user.username}</p>
+        <div class="text">
+          <p class="message-text">${msg.body}</p>
+          <p class="date">${msg.date}</p>
+        </div>
+      </li>
     `
 
     document.querySelector('#display').innerHTML += template
@@ -107,6 +118,11 @@ if (roomId) {
     }).join("")
 
     document.querySelector("#users-online").innerHTML = usersOnline
+  }
+
+  function scrollToBottom() {
+    var objDiv = document.getElementById("display");
+    objDiv.scrollTop = objDiv.scrollHeight;
   }
 }
 

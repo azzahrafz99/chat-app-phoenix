@@ -22,7 +22,7 @@ defmodule Chatter.Talk do
 
     Repo.all(
       from [msg, user] in query,
-      select: %{body: msg.body, user: %{username: user.username}}
+      select: %{body: msg.body, user: %{username: user.username}, date: msg.inserted_at}
     )
   end
 

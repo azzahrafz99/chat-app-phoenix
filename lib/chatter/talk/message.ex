@@ -1,5 +1,7 @@
 defmodule Chatter.Talk.Message do
   use Ecto.Schema
+  use Timex
+
   import Ecto.Changeset
 
   schema "messages" do
@@ -16,5 +18,10 @@ defmodule Chatter.Talk.Message do
     message
     |> cast(attrs, [:body])
     |> validate_required([:body])
+  end
+
+  def date(message) do
+    require IEx; IEx.pry
+    Timex.from_now(message.inserted_at)
   end
 end

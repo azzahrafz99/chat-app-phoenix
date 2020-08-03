@@ -1,17 +1,9 @@
-<h2>Add New Room</h2>
-
-<%= form_for @changeset, Routes.room_path(@conn, :create), fn f -> %>
-  <div class="form-group">
-    <%= label f, :name, class: "control-label" %>
-    <%= text_input f, :name, class: "form-control" %>
-    <%= error_tag f, :name %>
+<div class="row">
+  <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2 col-xxl-6 offset-xxl-3 margin-top-100">
+    <div class="card">
+      <h3>Add New Room</h3>
+      <br>
+      <%= render "form.html", Map.put(assigns, :action, Routes.room_path(@conn, :create)) %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= label f, :description, class: "control-label" %>
-    <%= text_input f, :description, class: "form-control" %>
-    <%= error_tag f, :description %>
-  </div>
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

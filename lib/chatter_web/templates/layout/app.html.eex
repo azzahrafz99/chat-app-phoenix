@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <p class="username ">Signed in as: <b><%= Chatter.Accounts.current_user(@conn).username %></b></p>
+              <p class="username "><b><%= Chatter.Accounts.current_user(@conn).username %></b></p>
             </li>
             <li class="nav-item">
               <%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete, class: "btn btn-outline-purple" %>
@@ -35,7 +35,16 @@
     <% end %>
 
     <div class="container-fluid">
-      <%= @inner_content %>
+      <%= if @signed_in? do %>
+        <div class="row full-height">
+          <%= render ChatterWeb.SharedView, "_room_list.html", assigns %> 
+          <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9 col-xxl-10 padding-0 content">
+            <%= @inner_content %>
+          </div>
+        </div>
+      <% else %>
+        <%= @inner_content %>
+      <% end %>
     </div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>

@@ -9,13 +9,12 @@ defmodule ChatterWeb.RoomController do
   plug :authorize_user when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
-    rooms = Talk.list_rooms()
-    render(conn, "index.html", rooms: rooms)
+    render(conn, "index.html", rooms: Talk.list_rooms())
   end
 
   def new(conn, _params) do
     changeset = Room.changeset(%Room{}, %{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, rooms: Talk.list_rooms())
   end
 
   def create(conn, %{"room" => room_params}) do
@@ -32,13 +31,13 @@ defmodule ChatterWeb.RoomController do
 
   def show(conn, %{"id" => id}) do
     room = Talk.get_room!(id)
-    render(conn, "show.html", room: room, current_user: conn.assigns.current_user)
+    render(conn, "show.html", room: room, current_user: conn.assigns.current_user, rooms: Talk.list_rooms())
   end
 
   def edit(conn, %{"id" => id}) do
     room = Talk.get_room!(id)
     changeset = Talk.change_room(room)
-    render(conn, "edit.html", room: room, changeset: changeset)
+    render(conn, "edit.html", room: room, changeset: changeset, rooms: Talk.list_rooms())
   end
 
   def update(conn, %{"id" => id, "room" => room_params}) do
@@ -79,7 +78,7 @@ defmodule ChatterWeb.RoomController do
     %{params: %{"id" => room_id}} = conn
     room = Talk.get_room!(room_id)
 
-    if AuthUser.can_access?(conn.assigns.current_user.id, room) do
+    if AuthUser.can_access?(conn.assigns.current_user, room) do
       conn
     else
       conn

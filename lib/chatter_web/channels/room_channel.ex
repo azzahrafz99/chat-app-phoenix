@@ -1,5 +1,6 @@
 defmodule ChatterWeb.RoomChannel do
   use ChatterWeb, :channel
+  use Timex
 
   alias Chatter.Repo
   alias Chatter.Accounts.User
@@ -9,7 +10,9 @@ defmodule ChatterWeb.RoomChannel do
 
   def join("room:" <> room_id, _params, socket) do
     send(self(), :after_join)
-    {:ok, %{messages: Talk.list_messages(room_id)}, assign(socket, :room_id, room_id)}
+    data     = Talk.list_messages(room_id)
+    messages = Enum.map(data, fn d -> %{body: d.body, user: %{username: d.user.username}, date: Timex.from_now(d.date)} end)
+    {:ok, %{messages: messages}, assign(socket, :room_id, room_id)}
   end
 
   def handle_in("message:add", %{"message" => body}, socket) do
@@ -19,7 +22,7 @@ defmodule ChatterWeb.RoomChannel do
     case Talk.create_message(user, room, %{body: body}) do
       {:ok, message}  ->
         message = Repo.preload(message, :user)
-        message_template = %{body: message.body, user: %{username: message.user.username}}
+        message_template = %{body: message.body, user: %{username: message.user.username}, date: Timex.from_now(message.inserted_at)}
         broadcast!(socket, "room:#{message.room_id}:new_message", message_template)
         {:reply, :ok, socket}
 

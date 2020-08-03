@@ -1,9 +1,20 @@
 .room-list {
   box-shadow: 0 15px 30px 0 rgba(0,0,0,0.05);
   padding-right: 0;
+  z-index: 2;
 
   .list-group {
-    margin-top: 60px;
+    margin-top: 128px;
+
+    .list-group-item.active,  .list-group-item:hover{
+      background-color: $light-purple;
+      border-left: 3px solid #5a189a;
+      padding-left: 32px;
+      
+      a {
+        color: black !important;
+      }
+    }
 
     .list-group-item {
       border: none;
@@ -14,16 +25,6 @@
         color: $dusty-purple;
         font-weight: 500;
       }
-      
-      &:hover {
-        background-color: $light-purple;
-        border-left: 3px solid #5a189a;
-        padding-left: 32px;
-        
-        a {
-          color: black !important;
-        }
-      }
     }
   }
 }
@@ -31,5 +32,117 @@
 .jumbotron {
   .btn {
     margin-top: 20px;
+  }
+}
+
+#display {
+  height: 550px;
+  margin-bottom: 30px;
+  margin-top: 0px !important;
+  padding-bottom: 20px;
+
+  .list-group-item {
+    background: none;
+    border: none;
+  }
+
+  .message {
+    margin-bottom: 15px;
+
+    .username {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 0;
+      margin-bottom: 5px;
+    }
+  
+    .text {
+      font-size: 15px;
+      margin-bottom: 0;
+      margin-top: 5px;
+      width: 70%;
+
+      .message-text {
+        margin-bottom: 17px;
+        padding: 15px 25px;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .date {
+        bottom: 0;
+        font-size: 12px;
+        position: absolute;
+      }
+    }
+
+    &__user {
+      .username {
+        text-align: end;
+      }
+
+      .text {
+        float: right;
+
+        .message-text {
+          background-color: $purple-two;
+          border-bottom-left-radius: 20px;
+          border-bottom-right-radius: 20px;
+          border-top-left-radius: 20px;
+          box-shadow: 0 10px 15px 0 rgba(100, 48, 113, 0.2);
+          color: white;
+          float: right;
+          padding: 15px 25px;
+        }
+
+        .date {
+          right: 20px;
+        }
+      }
+    }
+
+    &__other {
+      .text {
+        float: left;
+
+        .message-text {
+          background-color: white;
+          border-bottom-left-radius: 20px;
+          border-bottom-right-radius: 20px;
+          border-top-right-radius: 20px;
+          box-shadow: 0 15px 30px 0 rgba(0,0,0,0.05);
+          float: left;
+        }
+
+        .date {
+          left: 20px;
+        }
+      }
+    }
+  }
+}
+
+#message-form {
+  #message-body {
+    border-radius: 35px;
+    border: 1px solid $light-purple-two;
+    font-size: 14px;
+    padding: 15px 25px;
+  }
+
+  button {
+    padding: 12px 25px;
+  }
+}
+
+.nav-child {
+  height: 60px;
+  position: relative !important;
+  z-index: 1;
+
+  .navbar-brand {
+    font-size: 18px;
   }
 }

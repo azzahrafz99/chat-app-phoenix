@@ -10,6 +10,6 @@
     <%= error_tag f, :description %>
   </div>
   <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
+    <%= submit "Submit", class: "btn btn-purple margin-0" %>
   </div>
 <% end %>

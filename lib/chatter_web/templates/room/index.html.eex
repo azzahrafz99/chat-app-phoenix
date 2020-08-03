@@ -1,29 +1,9 @@
-<div class="row full-height">
-  <div class="col-md-2 room-list bg-white">
-    <ul class="list-group">
-      <%= for room <- @rooms do %>
-        <li class="list-group-item margin-0">
-          <%= link to: Routes.room_path(@conn, :show, room.id) do %>
-            <p class="margin-0"># <%= room.name %></p>
-          <% end %>
-          <%= if !is_nil(room.description) && room.description !== "" do %>
-            <div class="float-right text-info" data-toggle="tooltip" title="<%= room.description %>">
-              <i class="fas fa-comment-medical"></i>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+<div class="jumbotron margin-top-300 text-center">
+  <div class="page-header">
+    <h2>Welcome to Chat App</h2>
   </div>
-  <div class="col-md-10 text-center margin-top-300">
-    <div class="jumbotron">
-      <div class="page-header">
-        <h2>Welcome to Chat App</h2>
-      </div>
-      <div class="page-header">
-        <h4><small>Choose a room or create one</small></h4>
-        <%= link "Create Room", to: Routes.room_path(@conn, :new), class: "btn btn-purple" %>
-      </div>
-    </div>
+  <div class="page-header">
+    <h4><small>Choose a room or create one</small></h4>
+    <%= link "Create Room", to: Routes.room_path(@conn, :new), class: "btn btn-purple" %>
   </div>
 </div>

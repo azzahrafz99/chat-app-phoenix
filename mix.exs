@@ -20,7 +20,7 @@ defmodule Chatter.MixProject do
   def application do
     [
       mod: {Chatter.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ex_machina, :faker_elixir_octopus]
+      extra_applications: [:logger, :runtime_tools, :ex_machina, :faker_elixir_octopus, :timex]
     ]
   end
 
@@ -48,7 +48,8 @@ defmodule Chatter.MixProject do
       {:ex_machina, "~> 2.4"},
       {:faker_elixir_octopus, "> 0.0.0"},
       {:comeonin, "~> 5.3"},
-      {:bcrypt_elixir, "~> 2.0"}
+      {:bcrypt_elixir, "~> 2.0"},
+      {:timex, "~> 3.5"}
     ]
   end
 

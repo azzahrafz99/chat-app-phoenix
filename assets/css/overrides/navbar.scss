@@ -1,6 +1,10 @@
 nav {
+  border-bottom: 1px solid $light-grey;
+  height: 70px;
   padding: 5px 35px;
-  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.05);
+  position: fixed !important;
+  width: 100%;
+  z-index: 3;
 
   .logo {
     display: block;
@@ -25,7 +29,7 @@ li.nav-item {
 .username {
   margin: 0;
   margin-right: 20px;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .navbar-brand {

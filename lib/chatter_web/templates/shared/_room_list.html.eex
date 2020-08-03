@@ -1,0 +1,17 @@
+<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 col-xxl-2 room-list bg-white">
+  <ul class="list-group">
+    <%= for room <- @rooms do %>
+      <li class="list-group-item margin-0 <%= if assigns[:room], do: if room.id == @room.id, do: 'active', else: '' %>">
+        <%= link to: Routes.room_path(@conn, :show, room.id) do %>
+          <p class="margin-0"># <%= room.name %></p>
+        <% end %>
+        <%= if !is_nil(room.description) && room.description !== "" do %>
+          <div class="float-right text-info" data-toggle="tooltip" title="<%= room.description %>">
+            <i class="fas fa-comment-medical"></i>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+

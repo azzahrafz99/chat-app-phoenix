@@ -22,4 +22,3 @@ defmodule ChatterWeb.Plugs.AuthUser do
     user && user.id == room.user_id
   end
 end
-
